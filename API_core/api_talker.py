@@ -18,7 +18,7 @@ class ApiTalker:
 
         params = current_gate_param
         
-        if prev_failed_gates != None:
+        if prev_failed_gates != None and len(prev_failed_gates) > 0:
             fg_as_str = ','.join(prev_failed_gates)
             failed_gates_param = f'{const.RP_FAILED_GATES}={fg_as_str}'
             params += f'&{failed_gates_param}'
