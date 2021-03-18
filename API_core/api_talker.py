@@ -86,7 +86,8 @@ class ApiRequest:
             # TODO raise exception
             # Handle the exception in top level
             # Log exception for user and tell him contact suppot.
-            pass
+
+            raise ValueError('Could not get an available gateway.')
 
         return new_gate
 
