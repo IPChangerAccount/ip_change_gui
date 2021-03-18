@@ -2,12 +2,13 @@ from API_core.api_talker import ApiRequest
 import sys
 import time
 
+import sys
+import traceback
+
 from threading import Thread
 
 import PySimpleGUI as sg
 from PySimpleGUI.PySimpleGUI import main
-
-import netifaces
 
 from ip_operations import NetworkHandler
 
@@ -59,8 +60,12 @@ def change_ip(program_state : State):
             print('Failed')
 
     except Exception as ex:
+        print(sys.exc_info()[0])
+        print(traceback.format_exc())
+
+        
         err_text = \
-          f'AN ERROR OCCURRED! Error text: {str(ex)}. Please contact support.\n'
+          f'\n\nAN ERROR OCCURRED! Error text: {str(ex)}. Please contact support.\n'
 
         print(err_text)
 
