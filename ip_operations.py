@@ -153,14 +153,16 @@ class NetworkHandler:
 
 
             # === Execute gateway change CMD ================================ #
-            
+            ip_change_cmd = [  'netsh', 'int', 'ip', 'set', 'address', 
+                              f'"{cls._get_ethernet_name()}"',
+                              f'address={conn_details[cls.LAN_IP_V4]}',
+                              f'mask={conn_details[cls.SUBNET_MASK]}',
+                              f'gateway={new_gateway}'
+                            ]
+
+            print(f'Going to change gateway using CMD {ip_change_cmd}')
             exec_result = subprocess.run(
-                [  'netsh', 'int', 'ip', 'set', 'address', 
-                  f'"{cls._get_ethernet_name()}"',
-                  f'address={conn_details[cls.LAN_IP_V4]}',
-                  f'mask={conn_details[cls.SUBNET_MASK]}',
-                  f'gateway={new_gateway}'
-                ],
+                ip_change_cmd,
                 stdout=subprocess.PIPE)
 
             exec_result = exec_result.stdout.decode(cls.sys_encoding()).strip()

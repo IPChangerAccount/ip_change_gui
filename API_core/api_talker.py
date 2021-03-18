@@ -4,7 +4,7 @@ import API_core.constants_change_ip as const
 
 class ApiTalker:
     
-    API_IP = 'http//:/192.168.99.254'
+    API_IP = 'http://192.168.99.254'
 
     URL_BASE = API_IP + '/?' + const.RP_REQ_OPERATION + '={op}&{pars_pairs}'
 
