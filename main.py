@@ -52,7 +52,7 @@ def change_ip(program_state : State):
 
         new_gate = api_request.get_new_gate()
 
-        if NetworkHandler.change_default_gateway(new_gate):
+        if NetworkHandler.change_default_gateway(new_gate, conn_details):
             api_request.confirm_gate_usage_towards_api(new_gate)
             print('Success')
         else:

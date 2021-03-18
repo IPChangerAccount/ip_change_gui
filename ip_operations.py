@@ -81,8 +81,6 @@ class NetworkHandler:
         
         target_conn_name = cls._get_ethernet_name()
 
-        # Remove below line at real test system
-        target_conn_name ='Ethernet'
 
         if platform.system() == cls.WIN_OS:
 
@@ -182,6 +180,8 @@ class NetworkHandler:
             
             while retries_number <= RETRIES:
                 time.sleep(3)
+
+                retries_number +=1
                 try:
                     new_details = cls.get_connection_details()
                     

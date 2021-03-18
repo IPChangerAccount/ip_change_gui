@@ -4,7 +4,7 @@ import API_core.constants_change_ip as const
 
 class ApiTalker:
     
-    API_IP = '192.168.99.254'
+    API_IP = 'http//:/192.168.99.254'
 
     URL_BASE = API_IP + '/?' + const.RP_REQ_OPERATION + '={op}&{pars_pairs}'
 
@@ -33,14 +33,14 @@ class ApiTalker:
 
         req_res = requests.get(req_url)  
 
-        return req_res.status_code, req_res.json
+        return req_res.status_code, req_res.json()
 
 
     @classmethod
     def finish_ip_change(cls, prev_gate : str, new_gate : str):
 
         prev_gate_param = f'{const.RP_PREV_GATE}={prev_gate}'   
-        new_gate_param = f'{const.RP_PREV_GATE}={new_gate}'
+        new_gate_param = f'{const.RP_SUCCESS_GATE}={new_gate}'
 
         params ='&'.join([prev_gate_param, new_gate_param])
 
