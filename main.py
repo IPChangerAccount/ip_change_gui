@@ -67,8 +67,8 @@ def change_ip(program_state : State):
 
         
         err_text = \
-          f'\n\nAN ERROR OCCURRED! Error text: {str(ex)}. '\
-           + '\nPLease contact support.\n'
+          f'\nAN ERROR OCCURRED! Error text: {str(ex)}. '\
+           + '\nPlease contact support.\n'
 
         print(err_text)
 
