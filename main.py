@@ -51,7 +51,7 @@ def change_ip(program_state : State):
         api_request = ApiRequest(conn_details[NetworkHandler.DEFAULT_GATEWAY])
         print('    Requesting new gateway...')
         new_gate = api_request.get_new_gate()
-        print('    New gateway {new_gate} received. Applying...')
+        print(f'    New gateway {new_gate} received. Applying...')
         
 
         if NetworkHandler.change_default_gateway(new_gate, conn_details):
