@@ -12,11 +12,14 @@ from PySimpleGUI.PySimpleGUI import main
 
 from ip_operations import NetworkHandler
 
+import logging
+
 
 # === Layout definition ===================================================== #
 CHANGE_IP_BTN = 'Change IP'
 TEXT_KEY      = '-GreetText-'
 BTN_KEY       = '-ChangeIpBtn-'
+OUTPUT_KEY    = '-ExecLog-'
 
 text_object = sg.Text("Push below button to change external IP", key = TEXT_KEY)
 change_ip_btn = sg.Button(CHANGE_IP_BTN, key = BTN_KEY)
@@ -25,7 +28,9 @@ horizontal_sep = sg.HorizontalSeparator(color = 'green')
 
 exec_log_text = sg.Text("Execution log:")
 
-output_window = sg.Output(echo_stdout_stderr = True, size=(90,20))
+output_window = sg.Output(echo_stdout_stderr = True, 
+                         size=(90,20), 
+                         key = OUTPUT_KEY)
 
 layout = [[text_object], [change_ip_btn], 
           [horizontal_sep], 
@@ -77,6 +82,19 @@ def change_ip(program_state : State):
             program_state.ip_change_in_progress = False
             window.FindElement(BTN_KEY).Update(disabled=False)
 
+def check_and_update_log_size():
+
+    output_val = window.FindElement(OUTPUT_KEY).get()
+
+    output_str_list = output_val.split('\n')
+
+    if len(output_str_list) > 500:
+        new_output_str_list = output_str_list[-500:]
+
+        new_output_str = '\n'.join(new_output_str_list)
+
+        window.FindElement(OUTPUT_KEY).update(value = new_output_str)
+
 
 if __name__ == '__main__':
 
@@ -94,6 +112,8 @@ if __name__ == '__main__':
         event, values = window.read()
         
         if event == BTN_KEY and not state.ip_change_in_progress:
+
+            check_and_update_log_size()
 
             state.ip_change_in_progress = True    
             window.FindElement(BTN_KEY).Update(disabled=True)
