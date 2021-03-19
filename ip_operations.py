@@ -140,7 +140,7 @@ class NetworkHandler:
 
         # TODO Check if all needed data was fetched. If not - raise exception.
 
-        print (result)
+        print (f'    Current network datails:{result}')
         return result
 
     @classmethod
@@ -160,7 +160,7 @@ class NetworkHandler:
                               f'gateway={new_gateway}'
                             ]
 
-            print(f'Going to change gateway using CMD {ip_change_cmd}')
+            print(f'    Going to change gateway using CMD {ip_change_cmd}')
             exec_result = subprocess.run(
                 ip_change_cmd,
                 stdout=subprocess.PIPE)
@@ -168,7 +168,7 @@ class NetworkHandler:
             exec_result = exec_result.stdout.decode(cls.sys_encoding()).strip()
 
             if WIN_RUN_AS_ADM_ERROR in exec_result.lower():
-                print('Error! Please run the app as Administrator.')
+                print('ERROR! Please run the app as Administrator.')
                 # TODO raise exception here ( or print) about the app should be
                 # launched as admin.
                 pass
@@ -193,29 +193,32 @@ class NetworkHandler:
 
                     if new_ip == None \
                       or new_ip != conn_details[cls.LAN_IP_V4]:
-                        print(f'WARNING: incorrect LAN IP {new_ip} fetched')
+                        print(
+                            f'    WARNING: incorrect LAN IP {new_ip} fetched')
                     
                     elif new_mask == None \
                       or new_mask != conn_details[cls.SUBNET_MASK]:
-                        print(f'WARNING: incorrect Mask {new_mask} fetched')
+                        print(
+                            f'    WARNING: incorrect Mask {new_mask} fetched')
 
                     elif new_gate == None \
                       or new_gate != new_gateway:
-                        print(f'WARNING: incorrect fateway {new_gate} fetched')  
+                        print(
+                            f'    WARNING: incorrect fateway {new_gate} fetched')  
 
                     else:
                         changes_applied = True
                         break
 
-                    print('Retrying...')
+                    print('    Retrying...')
 
                 except Exception as ex:
-                    print(f'WARNING: ' 
+                    print(f'    WARNING: ' 
                           + f'exception while get new connection details: {ex}')
 
             if not changes_applied:
-                print(f'ERROR! IP Change FAILED! PLease contact support.')
-                print(f'Change command result: {exec_result}')
+                print(f'    ERROR! IP Change FAILED! Please contact support.')
+                print(f'    Change command result: {exec_result}')
 
             # =============================================================== #
  

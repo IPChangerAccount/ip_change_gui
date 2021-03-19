@@ -59,7 +59,7 @@ def change_ip(program_state : State):
             print('Success! IP changed.')
         else:
             # TODO Here send failed result to the gateway
-            print('Failed')
+            print('FAILED! Please contact support.')
 
     except Exception as ex:
         print(sys.exc_info()[0])
@@ -67,7 +67,8 @@ def change_ip(program_state : State):
 
         
         err_text = \
-          f'\n\nAN ERROR OCCURRED! Error text: {str(ex)}. Please contact support.\n'
+          f'\n\nAN ERROR OCCURRED! Error text: {str(ex)}. '\
+           + '\nPLease contact support.\n'
 
         print(err_text)
 
