@@ -140,7 +140,7 @@ class NetworkHandler:
 
         # TODO Check if all needed data was fetched. If not - raise exception.
 
-        print (f'    Current network datails:{result}')
+        print (f'    Current network details:{result}')
         return result
 
     @classmethod
